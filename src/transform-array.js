@@ -18,7 +18,7 @@ function transform(arr) {
     throw new Error("'arr' parameter must be an instance of the Array!");
 
   // In a new array, a flag is added to each value of the original array:
-  let result = arr.map(element => [element, true]); // value => [value, flag]
+  const result = arr.map(element => [element, true]); // value => [value, flag]
   const value = 0;
   const flag = 1;
 
