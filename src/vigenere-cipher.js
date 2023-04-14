@@ -56,21 +56,21 @@ class VigenereCipheringMachine {
 
     // Transformation of message and key strings into arrays of numbers:
     key = strToNums(key); // coding and decoding key
-    message = strToNums(message); // string to encode or decode
+    message = this.type ? strToNums(message) : strToNums(message).reverse(); // string to encode or decode
+    // depending on the type, a string with a message is returned in a direct or inverted order
 
     let keyIndx = 0; // index in the key array
     message.forEach((messageNum, msgIndx) => {
       if (0 <= messageNum && messageNum < alphabetSize) // codec encrypts and decrypts only the Latin
-        // alphabet (all other symbols remain unchanged)
+                                                        // alphabet (all other symbols remain unchanged)
         message[msgIndx] = ((decode ? -1 : 1) * key[keyIndx++ % key.length] + decode * alphabetSize + messageNum) % alphabetSize;
       // When the message is longer than the key, the key is repeated as many times as needed 
       // (keyIndx++ % key.length)
     });
     // Convertion an array of numbers back to a string with a message:
     message = numsToStr(message);
-    // Depending on the type, a string with an encrypted or decrypted message is returned
-    // in a direct or inverted order:
-    return this.type ? message : message.split("").reverse().join("");
+    // A string with an encrypted or decrypted message is returned:
+    return message;
   }
 }
 
